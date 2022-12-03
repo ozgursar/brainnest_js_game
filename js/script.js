@@ -86,7 +86,7 @@ function game(rounds) {
       finalResult = 'Computer wins!'
     }
   }
-  console.log(`\n***** FINAL RESULT *****\n${finalResult}`)
+  console.log(`\n***** FINAL RESULT *****\n${finalResult} (${scorePlayer}-${scoreComputer})`)
 }
 
 // Play 5 rounds
