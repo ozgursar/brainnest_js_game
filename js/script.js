@@ -1,3 +1,4 @@
+// Global variables for holding score state
 let scorePlayer
 let scoreComputer
 
@@ -29,55 +30,52 @@ function requestPlayerInput() {
 }
 
 function playRound(playerSelection, computerSelection) {
-  let message
+  let roundResult
   if (playerSelection == computerSelection) {
-    message = `Draw! Player and computer both selected ${playerSelection}`
-  }
-  if (playerSelection == 'rock' && computerSelection == 'paper') {
-    message = 'You lose! Paper beats Rock'
+    roundResult = `Draw! Player and computer both selected ${playerSelection}`
+  } else if (playerSelection == 'rock' && computerSelection == 'paper') {
+    roundResult = `You lose! Computer selected ${computerSelection}. Paper covers rock.`
+    scoreComputer++
+  } else if (playerSelection == 'rock' && computerSelection == 'scissors') {
+    roundResult = `You win! Computer selected ${computerSelection}. Rock crushes scissors.`
+    scorePlayer++
+  } else if (playerSelection == 'paper' && computerSelection == 'rock') {
+    roundResult = `You win! Computer selected ${computerSelection}. Paper covers rock.`
+    scorePlayer++
+  } else if (playerSelection == 'paper' && computerSelection == 'scissors') {
+    roundResult = `You lose! Computer selected ${computerSelection}. Scissors cut paper.`
+    scoreComputer++
+  } else if (playerSelection == 'scissors' && computerSelection == 'paper') {
+    roundResult = `You win! Computer selected ${computerSelection}. Scissors cut paper.`
+    scorePlayer++
+  } else if (playerSelection == 'scissors' && computerSelection == 'rock') {
+    roundResult = `You lose! Computer selected ${computerSelection}. Rock crushes scissors.`
     scoreComputer++
   }
-  if (playerSelection == 'rock' && computerSelection == 'scissors') {
-    message = 'You win! Rock beats Scissors'
-    scorePlayer++
-  } 
-  if (playerSelection == 'paper' && computerSelection == 'rock') {
-    message = 'You win! Paper beats Rock'
-    scorePlayer++
-  }
-  if (playerSelection == 'paper' && computerSelection == 'scissors') {
-    message = 'You lose! Scissors beats Paper'
-    scoreComputer++
-  }
-  if (playerSelection == 'scissors' && computerSelection == 'paper') {
-    message = 'You win! Scissors beats Paper'
-    scorePlayer++
-  }
-  if (playerSelection == 'scissors' && computerSelection == 'rock') {
-    message = 'You lose! Rock beats Scissors'
-    scoreComputer++
-  }
-  console.log(message)
+  return roundResult
 }
 
 
 function game(rounds) {
-  // Initialize scores and final result
+  let singleRoundResult
+  let finalResult
+
+  // Initialize scores before starting the game
   scorePlayer = 0
   scoreComputer = 0
-  let finalResult
 
   // Loop rounds
   for (let i=0; i<rounds; i++) {
     console.log(`***** ROUND ${i+1} *****`)
-    playRound(requestPlayerInput(), computerPlay())
+    singleRoundResult = playRound(requestPlayerInput(), computerPlay())
+    console.log (singleRoundResult)
     console.log(`Player: ${scorePlayer} - Computer: ${scoreComputer}`)
   }
 
   // Calculate final result using signum function
   switch (Math.sign(scorePlayer-scoreComputer)) {
     case 0: {
-      finalResult = 'Draw!'
+      finalResult = 'It\'s a Draw!'
       break
     }
     case 1: {
