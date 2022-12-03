@@ -20,7 +20,7 @@ function computerPlay() {
 
 function requestPlayerInput() {
   let playerInput = prompt("What's your selection? (Rock, Paper or Scissors)")
-  if (playerInput) playerInput=playerInput.toLocaleLowerCase()
+  if (playerInput) playerInput=playerInput.toLocaleLowerCase().trim()
   if (!(playerInput == 'rock' || playerInput == 'paper' || playerInput == 'scissors')) {
     alert ("Please enter a valid selection!")
     return requestPlayerInput()
