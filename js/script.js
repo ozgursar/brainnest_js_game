@@ -32,7 +32,7 @@ function requestPlayerInput() {
 function playRound(playerSelection, computerSelection) {
   let roundResult
   if (playerSelection == computerSelection) {
-    roundResult = `Draw! Player and computer both selected ${playerSelection}`
+    roundResult = `Draw! Player and computer both selected ${playerSelection}.`
   } else if (playerSelection == 'rock' && computerSelection == 'paper') {
     roundResult = `You lose! Computer selected ${computerSelection}. Paper covers rock.`
     scoreComputer++
